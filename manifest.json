@@ -1,0 +1,19 @@
+{
+  "name": "WikiQueue",
+  "version": "2.1.1",
+  "description": "Queue your Wiki-thirst!",
+  "icons": { 
+		"128": "assets/images/icon.png",
+		"16": "assets/images/icon.png"
+	},
+  "browser_action": {
+    "default_icon" : "assets/images/icon.png",
+	"default_title": "WikiQueue",
+	"popup":"popup.html"
+  },
+  "background_page":"background.html",
+  "permissions": [
+    "tabs",
+	"contextMenus"
+  ]
+}

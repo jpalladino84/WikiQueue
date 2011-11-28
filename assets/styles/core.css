@@ -1,0 +1,89 @@
+/***************************
+ * @Author: Jeff Palladino
+ * @Version: 1.5
+ * @Date: 07/16/2011
+ ***************************/
+
+
+/********* Popup *********/
+body {
+  height:120px;
+  overflow-x:hidden;
+	background-image:url(../images/bg.jpg);
+}
+
+
+input{
+	margin-left:125px;
+}
+
+#header{	
+	background-image:url(../images/wikiQueue_header.png);
+	width:191px;
+	height:29px;
+	margin:30px 0px 0px 70px;
+	z-index:-1001;
+	position:absolute;
+}
+
+#instructions{
+	background-image:url('../images/instructions.png');
+	background-repeat:no-repeat;
+	width:268px;
+	height:190px;	
+	padding:10px;
+}
+
+#footer{
+	margin-bottom:0px;
+	width:300px;
+	height:auto;
+	font-family:seirf;
+	text-size:8px;
+}
+
+/******** Queue Item ******/
+a{
+	padding:5px;
+	color:#FFF;
+	font-size:18px;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-weight:bold;	
+}
+a:hover:before{
+	content:"> "	
+}
+a:visited{
+	color:#FFF;
+}
+ul{
+	list-style:none;
+	margin:40px 0 0 -15px;
+	padding-bottom:10px;
+	letter-spacing:1;
+}
+li{	
+	border-bottom:1px solid #FFF;		
+	padding-bottom:5px;
+	padding-top:5px;
+	padding-left:5px;	
+	margin-left:-10px;
+	width:300px;
+}
+
+/******** Delete Item *******/
+.deleteItem{
+	font-size:18px;
+	cursor:pointer;	
+	color:#FFF;
+	margin-left:-10px;
+	float:right;
+	font-weight:bold;
+	font-family:Georgia, "Times New Roman", Times, serif;
+}
+.deleteItem:hover{
+	color:#930;
+}
+/******** Delete Item END *******/
+/******** Queue Item END******/
+/********* Popup END *********/

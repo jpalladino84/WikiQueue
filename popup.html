@@ -1,0 +1,79 @@
+<link rel="stylesheet" type="text/css" href="assets/styles/core.css"/>
+<script type="text/javascript" src="assets/scripts/jquery.js"></script>
+<script>
+	// make a reference to the background page
+var page = chrome.extension.getBackgroundPage();
+	// make a reference to the queue object
+var wikiqueue = page.wikiqueue;
+
+$(document).ready(function(){		
+		// inital html update when popup first opens
+	updateHTML();		
+});
+
+function updateHTML(){		
+		// loop through local storage 
+	for (var i in localStorage){
+			// grab the entry
+		var item = localStorage.getItem(i);
+			// create the html for the selected entry
+		createHTML({key:i,newValue:item});
+	}
+		// update popup html
+	$('#header')[localStorage.length ? "show" : "hide"]();
+	$('#queueContainer')[localStorage.length ? "show" : "hide"]();
+	$('#instructions')[localStorage.length ? "hide" : "show"]();
+}
+
+	// will create a list item for the specified entry
+function createHTML(e){
+		// html element creation
+	var listItem = document.createElement("LI");	
+	var link = document.createElement("A");
+	var deleteOption = document.createElement("DIV");
+		// assign the list element id
+	listItem.id = e.key;
+		// set up the delete button for the entry
+	deleteOption.className = "deleteItem"	
+	deleteOption.innerHTML = "[X]";		
+	deleteOption.onclick = function(e){		
+			// call to the queue object to remove the entry when clicked
+		wikiqueue.removeItem(e,listItem.id);
+	}
+		// set up the anchor element 
+	link.innerHTML = e.key;
+	link.href =  e.newValue;	
+	link.onclick = function(e){
+			//create a new tab and direct the tab location to the entries url
+		chrome.tabs.create({url:e.srcElement.href});		
+	};
+	
+		// append all the entries to the queueList element
+	listItem.appendChild(deleteOption);
+	listItem.appendChild(link);	
+	$("#queueList")[0].appendChild(listItem);	
+		// popup html update
+	$('#header')[localStorage.length ? "show" : "hide"]();
+	$('#queueContainer')[localStorage.length ? "show" : "hide"]();
+	$('#instructions')[localStorage.length ? "hide" : "show"]();
+}
+	// called from the queue object to remove the html entry
+function removeHTML(id){	
+		// grab the html element
+	var elem = document.getElementById(id);
+		// we need to tell the elememt to remove itself
+	elem.parentNode.removeChild(elem);
+		// if there is no more entries then show the intructions
+	$('#header')[!localStorage.length ? "hide" : "show"]();
+	$("#instructions")[!localStorage.length ? "show" : "hide"]();
+	$("#queueContainer")[!localStorage.length ? "hide" : "show"]();
+}
+
+</script>
+
+<div id="header"></div>
+<div id="instructions"></div>
+<div id="queueContainer" style="width:350px; height:120px;" >
+	<ul id="queueList"></ul>
+</div>	
+
